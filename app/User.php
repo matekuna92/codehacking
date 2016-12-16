@@ -11,8 +11,9 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password',
+    protected $fillable = [  // " mi az amit kitöltsön amikor pl a formban data-t rögzítünk...
+        // eredetileg nemvolt benne a role_id, így myadmin-ban ott null szerepelt, és errort dobott !!!!
+        'name', 'email', 'password', 'role_id', 'is_active', 'photo_id'
     ];
 
     /**
