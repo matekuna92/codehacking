@@ -1,0 +1,1 @@
+@extends('layouts/admin'); <!-- ENÉLKÜL CSAK ÜRES OLDALT AD VISSZA !!!! -->

@@ -18,3 +18,11 @@ Route::get('/', function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('/admin', function()
+{
+    return view('admin.index'); // admin:folder, index:file ... resources : admin/index.blade.php
+});
+
+
+Route::resource('admin/users','AdminUsersController');
