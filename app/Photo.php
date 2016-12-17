@@ -15,15 +15,10 @@ class Photo extends Model
         return $this->belongsTo('App\Role');
     }
 
-    public function photo()
-    {
-        return $this->belongsTo('App\Photo');
-    }
-
     //accessor
 
     public function getFileAttribute($photo) // mostmár nem kell az img src-hez mindig a /images.. elég a {{}} rész
     {
-        return $this->$uploads . $photo;
+        return $this->uploads . $photo;
     }
 }
