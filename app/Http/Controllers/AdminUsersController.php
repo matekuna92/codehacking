@@ -9,6 +9,7 @@ use App\User;
 use App\Role;
 use App\Photo;
 use App\Http\Requests\UsersRequest;
+use App\Http\Requests\EditUsersRequest;
 
 class AdminUsersController extends Controller
 {
@@ -47,6 +48,20 @@ class AdminUsersController extends Controller
      */
     public function store(UsersRequest $request)
     {
+
+        // create condition if password is empty
+
+        if(trim($request->pasword) == '') // whitespace miatt
+        {
+            $input = $request->except('password');
+        }
+        else
+        {
+            $input = $request->all();
+            $input['password'] = bcrypt($request->password);
+        }
+
+
         // csak teszteljük, hogy ad e vissza egyáltalán valamit a form, ha a gombra kattintva elküldjük
        // return $request->all();
 
@@ -58,7 +73,7 @@ class AdminUsersController extends Controller
         UsersRequest-et vár.. ez alapján ellenőrzi, megadtunk e mindent a formban, ami required
         FENT IMPORTÁLNI MERT NEM TALÁLJA ANÉLKÜL !!!!! */
 
-        $input = $request->all();
+
 
         if ($file = $request->file('photo_id')) // HA VAN KÉP
             // //a users. create blade-ben át kellett írni az eredeti file-t photo_id-ra hogy megtalálja..
@@ -70,16 +85,15 @@ class AdminUsersController extends Controller
             $input['photo_id'] = $photo->id;
         }
 
-        $input['password'] = bcrypt($request->password);
+        //$input['password'] = bcrypt($request->password);
+
+
+
         User::create($input);
 
         return redirect('/admin/users');
 
             //return "photo exists";
-
-
-
-
     }
 
     /**
@@ -119,13 +133,22 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UsersRequest $request, $id)
+    public function update(EditUsersRequest $request, $id)
     {
         // test if we recive data
         //return $request->all();
 
         $user = User::findOrFail($id);
-        $input = $request->all();
+
+        if(trim($request->pasword) == '') // whitespace miatt
+        {
+            $input = $request->except('password');
+        }
+        else
+        {
+            $input = $request->all();
+            $input['password'] = bcrypt($request->password);
+        }
 
         if($file = $request->file('photo_id'))
         {
