@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Photo extends Model
 {
     //
+    protected $uploads = '/images/';
     protected $fillable = ['file'];
 
     public function role()
@@ -17,5 +18,12 @@ class Photo extends Model
     public function photo()
     {
         return $this->belongsTo('App\Photo');
+    }
+
+    //accessor
+
+    public function getFileAttribute($photo) // mostmár nem kell az img src-hez mindig a /images.. elég a {{}} rész
+    {
+        return $this->$uploads . $photo;
     }
 }
