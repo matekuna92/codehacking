@@ -103,7 +103,13 @@ class AdminUsersController extends Controller
     public function edit($id)
     {
         //
-        return view('admin.users.edit');
+        $user = User::findOrFail($id);
+
+        // edit oldalon "Unsupported operand types" error miatt ide kell ez a sor is + roles-t is átadjuk a compactnak.. ?????
+
+        $roles = Role::lists('name','id')->all();
+
+        return view('admin.users.edit',compact('user','roles'));
     }
 
     /**
@@ -113,9 +119,25 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UsersRequest $request, $id)
     {
-        //
+        // test if we recive data
+        //return $request->all();
+
+        $user = User::findOrFail($id);
+        $input = $request->all();
+
+        if($file = $request->file('photo_id'))
+        {
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images',$name);
+
+            $photo = Photo::create(['file'=>$name]);
+            $input['photo_id'] = $photo->id;
+        }
+
+        $user->update($input);
+        return redirect('/admin/users');
     }
 
     /**
