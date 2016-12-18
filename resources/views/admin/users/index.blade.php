@@ -2,6 +2,11 @@
 
 @section('content')
 
+    @if(Session::has('deleted_user'))
+        <strong> <p class="bg-danger"> {{session('deleted_user')}} </strong></p> <!-- Meg kell egyeznie azzal, amit a controllerben adtunk meg paraméterként ! -->
+    @endif
+
+
     <h1> Users </h1>
 
     <table class="table">

@@ -51,10 +51,21 @@
             </div>
 
             <div class="form-group">
-                {!! Form::submit('Create User',['class'=>'btn btn-primary']) !!}
+                {!! Form::submit('Create User',['class'=>'btn btn-primary col-sm-6']) !!}
             </div>
 
             {!! Form::close() !!}
+
+            {!! Form::open(['method'=>'DELETE', 'action'=>['AdminUsersController@destroy',$user->id]]) !!}
+        <!-- Missing required parameters for [Route: admin.users.destroy] [URI: admin/users/{users}]...
+        emiatt kellett külön []-be az adminusercontrollert + a userid-t átadni plusz paraméterként !!! -->
+
+            <div class="form-group">
+                <div class="form-group">
+                    {!! Form::submit('Delete user',['class'=>'btn btn-danger col-sm-6']) !!}
+                </div>
+                {!! Form::close() !!}
+            </div>
 
         </div>
 </div>
