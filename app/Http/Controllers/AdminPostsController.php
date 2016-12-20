@@ -83,6 +83,9 @@ class AdminPostsController extends Controller
     public function edit($id)
     {
         //
+        $post = Post::findOrFail($id);
+        $categories = Category::lists('name','id')->all(); // Undefined variable: categories error miatt kellett !!
+        return view('admin.posts.edit',compact('post','categories')); // és itt átadni a categories-t is
     }
 
     /**
@@ -95,6 +98,20 @@ class AdminPostsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $input = $request->all();
+
+        if ($file = $request->file('photo_id')) {
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images', $name);
+            $photo = Photo::create(['file' => 'name']);
+            $input['photo_id'] = $photo->id;
+        }
+
+        Auth::user()->posts()->whereId($id)->first()->update($input);
+        // we want to find the user post with same id as in update(parameter)
+        return redirect('/admin/posts');
+
+
     }
 
     /**

@@ -27,7 +27,7 @@
            <!--  <td>{$post->user_id}}</td> Meg van a 2 public function a 2 osztályban(hasmany, belongsto), mostmár kiirhato a neve-->
             <!-- eredeti:   <td> {$post->photo_id}} </td> -->
             <td> <img height="50" src="{{$post->photo ? $post->photo->file : 'http://placehold.it/400x400'}}"> </td>
-            <td> {{$post->user->name}}</td>
+            <td> <a href="{{route('admin.posts.edit',$post->id)}}">{{$post->user->name}} </a> </td>
             <td>{{$post->category ? $post->category->name : 'Uncategorized'}}</td>
 
             <td> {{$post->body}} </td>

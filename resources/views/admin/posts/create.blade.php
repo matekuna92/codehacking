@@ -1,12 +1,11 @@
-@extends('layouts.admin');
+@extends('layouts.admin')
 
 @section('content')
 
-<div class="row">
 
     <h1> Create Posts </h1>
 
-    {!!Form::open(['method'=>'post', 'action'=>'AdminPostsController@store']) !!}
+    {!! Form::open(['method'=>'post', 'action'=>'AdminPostsController@store','files'=>true]) !!}
 
         <div class="form-group">
             {!! Form::label('title','Title:') !!}
@@ -15,7 +14,7 @@
 
             <div class="form-group">
             {!! Form::label('category_id','Category') !!}
-                {!! Form::select('category_id',[''=>'Choose categories'], + $categories,null,['class'=>'form-control']) !!}
+                {!! Form::select('category_id',[''=>'Choose categories'] + $categories,null,['class'=>'form-control']) !!}
             </div>
 
             <div class="form-group">
@@ -34,7 +33,6 @@
 
     {!! Form::close() !!}
 
-</div>
 
 <div class="row">
     <!-- DISPLAYING ERRORS -->
