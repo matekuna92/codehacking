@@ -65,6 +65,10 @@ class AdminCategoriesController extends Controller
     public function edit($id)
     {
         //
+
+        $category = Category::findOrFail($id);
+        return view('admin.categories.edit', compact('category'));
+
     }
 
     /**
@@ -77,6 +81,9 @@ class AdminCategoriesController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $category = Category::findOrFail($id);
+        $category->update($request->all());
+        return redirect('/admin/categories');
     }
 
     /**
@@ -88,5 +95,8 @@ class AdminCategoriesController extends Controller
     public function destroy($id)
     {
         //
+        Category::findOrFail($id)->delete();
+        return redirect('/admin/categories');
+
     }
 }
