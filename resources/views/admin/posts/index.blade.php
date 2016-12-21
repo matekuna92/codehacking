@@ -19,7 +19,7 @@
         </thead>
         <tbody>
 
-        @if( $posts )
+        <!-- if( $posts ) -->
 
             @foreach($posts as $post)
           <tr>
@@ -36,6 +36,6 @@
           </tr>
 
           @endforeach
-          @endif
+          <!-- endif -->
 
 @endsection

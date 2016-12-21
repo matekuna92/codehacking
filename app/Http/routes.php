@@ -28,6 +28,7 @@ Route::group(['middleware'=>'admin'], function()        // group-ot hozunk létr
 {                                                        // a Kernel.php-ban is meg kellett adni a class-t előtte !!!{
     Route::resource('admin/users','AdminUsersController');
     Route::resource('admin/posts','AdminPostsController'); // users, és posts page csak adminnak elérhető !
+    Route::resource('admin/categories','AdminCategoriesController');
 });
 
 
