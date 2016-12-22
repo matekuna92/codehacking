@@ -29,6 +29,9 @@ Route::group(['middleware'=>'admin'], function()        // group-ot hozunk létr
     Route::resource('admin/users','AdminUsersController');
     Route::resource('admin/posts','AdminPostsController'); // users, és posts page csak adminnak elérhető !
     Route::resource('admin/categories','AdminCategoriesController');
+    Route::resource('admin/media','AdminMediasController');
+
+    // Route::get('admin/media/upload', ['as'=>'admin.media.upload','uses'=>'AdminMediasController@store']);
 });
 
 
