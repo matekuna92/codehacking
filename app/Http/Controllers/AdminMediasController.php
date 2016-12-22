@@ -30,4 +30,15 @@ class AdminMediasController extends Controller
         Photo::create(['file'=>$name]);
         // ha behúzom a területre weboldalon a képet, mostmár a public/images-ben is tárolódik egyből !!
     }
+
+    public function destroy($id)
+    {
+        $photo = Photo::findOrFail($id);
+        if(isset($this->photo->file))
+        {
+            unlink(public_path() . $photo->file);
+        }
+            $photo->delete();
+            return redirect('/admin/media');
+    }
 }
